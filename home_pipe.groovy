@@ -56,6 +56,25 @@ pipeline {
             '''
         }
     }
+
+    stage('PreFinal') {
+        steps{
+            sh '''
+            mkdir -p "${SRC_DIR}" "${DST_DIR}"
+            echo "NEW" > "${SRC_DIR}/myFile.txt"
+            stamp=$(date +%Y-%m-%d)
+
+            if [ -f "${DST_DIR}/myFile.txt" ] ; then
+                mv "${DST_DIR}/myFile.txt" "${DST_DIR}/myFile_old_${stamp}.txt"
+            fi
+            
+            mv "${SRC_DIR}/myFile.txt" "${DST_DIR}/myFile.txt"
+
+            ls -la "${SRC_DIR}"
+            ls -la "${DST_DIR}"
+            '''
+        }
+    }
     
     stage('End') {
         steps{
