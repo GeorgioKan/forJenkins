@@ -48,7 +48,7 @@ pipeline {
             echo "OLD" > target/myFile.txt
             stamp=$(date +%Y-%m-%d)
 
-            if[ -f target/myFile.txt ]; then
+            if [ -f target/myFile.txt ] ; then
                 mv target/myFile.txt "target/myFile_old_${stamp}.txt"
             fi
 
